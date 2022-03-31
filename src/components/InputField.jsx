@@ -2,8 +2,13 @@ import React from "react";
 
 function InputField({ ...props }) {
 	const InputChange = (e) => {
-		props.data(e.target.value);
+		if (e.target.value === null) {
+			console.log("Empty");
+		} else {
+			props.data(e.target.value);
+		}
 	};
+
 	return (
 		<>
 			<input

@@ -1,13 +1,20 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addTodoAction } from "../Store/action";
 
 function Button({ ...props }) {
 	const dispatch = useDispatch();
+	const selector = useSelector((state) => state);
 
 	const AddTodo = () => {
 		dispatch(addTodoAction(props.data));
 	};
+
+	useEffect(() => {
+		selector.todo.length === 0
+			? console.log("empty")
+			: localStorage.setItem("Todo", JSON.stringify(selector.todo));
+	}, [selector.todo]);
 
 	return (
 		<>

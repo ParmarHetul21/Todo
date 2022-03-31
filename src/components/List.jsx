@@ -1,8 +1,17 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { loadTodoAction } from "../Store/action";
 
 function List() {
 	const selector = useSelector((state) => state.todo);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (localStorage.getItem("Todo")) {
+			dispatch(loadTodoAction(JSON.parse(localStorage.getItem("Todo"))));
+		}
+	}, [dispatch]);
+
 	return (
 		<>
 			{selector.length < 0 ? (
