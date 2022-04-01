@@ -14,13 +14,23 @@ function List() {
 
 	return (
 		<>
-			{selector.length < 0 ? (
+			{selector.length <= 0 ? (
 				<div>Empty value not allowed</div>
 			) : (
 				<div className="todo-list">
 					<ul className="ul-list">
 						{selector.map((todo) => {
-							return <li key={todo}>{todo}</li>;
+							return (
+								<li key={todo.id}>
+									{todo.name}{" "}
+									{todo.id && (
+										<>
+											<i className="fal fa-check-circle"></i>
+											<i className="pl fal fa-times-circle"></i>
+										</>
+									)}
+								</li>
+							);
 						})}
 					</ul>
 				</div>

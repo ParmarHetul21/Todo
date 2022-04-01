@@ -1,8 +1,8 @@
 import { ADD_TODO, NEW_TODO } from "./actionType";
 
-export const addTodoAction = (todo) => ({
+export const addTodoAction = (id, name, compeleted = false) => ({
 	type: ADD_TODO,
-	payload: todo
+	payload: { id, name, compeleted }
 });
 
 export const loadTodoAction = (todo) => ({

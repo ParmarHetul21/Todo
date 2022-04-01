@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import uuid from "react-uuid";
 import { addTodoAction } from "../Store/action";
 
 function Button({ ...props }) {
@@ -7,7 +8,7 @@ function Button({ ...props }) {
 	const selector = useSelector((state) => state);
 
 	const AddTodo = () => {
-		dispatch(addTodoAction(props.data));
+		dispatch(addTodoAction(uuid(), props.data));
 	};
 
 	useEffect(() => {

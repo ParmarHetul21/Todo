@@ -36,11 +36,14 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	gap: 10px;
-	align-items: center;
-	padding-right: 30px;
+	gap: 20px;
+	padding-left: 70px;
+	align-items: left;
 }
 .ul-list li {
 	font-size: 24px;
 	font-family: "Times New Roman", Times, serif;
+}
+.pl {
+	padding-left: 10px;
 }
