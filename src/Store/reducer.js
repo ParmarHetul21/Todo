@@ -1,4 +1,10 @@
-import { ADD_TODO, NEW_TODO } from "./actionType";
+import {
+	ADD_TODO,
+	NEW_TODO,
+	COMPELETED_TODO,
+	UPDATE_TODO,
+	DELETED_TODO
+} from "./actionType";
 
 const initalState = {
 	todo: []
@@ -10,6 +16,28 @@ const todoReducer = (state = initalState, action) => {
 			return { ...state, todo: [...state.todo, action.payload] };
 		case NEW_TODO:
 			return { ...state, todo: action.payload };
+		case COMPELETED_TODO:
+			return {
+				...state,
+				todo: state.todo.map((todo) => {
+					if (todo.id === action.payload) {
+						return {
+							...todo,
+							compeleted: true
+						};
+					}
+					return todo;
+				})
+			};
+
+		case UPDATE_TODO:
+			return;
+
+		case DELETED_TODO:
+			return {
+				...state,
+				todo: state.todo.filter((todo) => todo.id !== action.payload)
+			};
 		default:
 			return state;
 	}

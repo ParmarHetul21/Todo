@@ -1,7 +1,6 @@
 body {
 	background: lightsalmon;
 }
-
 .todo-title {
 	font-size: 28px;
 }
@@ -21,9 +20,13 @@ body {
 .lg-btn-submit {
 	background-color: bisque;
 	height: 40px;
-	width: 120px;
+	width: 140px;
 	border-radius: 50px;
 	font-size: 18px;
+}
+.lg-btn-submit:hover {
+	background-color: lightgreen;
+	border: 2px solid black;
 }
 .todo-list {
 	height: 300px;
@@ -46,4 +49,8 @@ body {
 }
 .pl {
 	padding-left: 10px;
+}
+.btn-filter {
+	display: flex;
+	gap: 10px;
 }

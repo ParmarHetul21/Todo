@@ -1,16 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loadTodoAction } from "../Store/action";
+import {
+	loadTodoAction,
+	compeletedTodoAction,
+	deletedTodoAction
+} from "../Store/action";
 
-function List() {
+function List({ ...props }) {
 	const selector = useSelector((state) => state.todo);
 	const dispatch = useDispatch();
+	const [compeleted, setCompeleted] = useState(false);
+
+	const deletedTodo = (id) => dispatch(deletedTodoAction(id));
 
 	useEffect(() => {
 		if (localStorage.getItem("Todo")) {
 			dispatch(loadTodoAction(JSON.parse(localStorage.getItem("Todo"))));
 		}
 	}, [dispatch]);
+
+	const compeletedTodo = (id) => {
+		dispatch(compeletedTodoAction(id));
+		setCompeleted(true);
+	};
+
+	const editTodo = (id) => {
+		props.editTodo(true);
+		props.editId(id);
+	};
 
 	return (
 		<>
@@ -19,22 +36,37 @@ function List() {
 			) : (
 				<div className="todo-list">
 					<ul className="ul-list">
-						{selector.map((todo) => {
-							return (
-								<li key={todo.id}>
-									{todo.name}{" "}
-									{todo.id && (
-										<>
-											<i className="fal fa-check-circle"></i>
-											<i className="pl fal fa-times-circle"></i>
-										</>
-									)}
-								</li>
-							);
-						})}
+						{props.todos.map((todo) => (
+							<li key={todo.id}>
+								{todo.name}{" "}
+								{todo.id && (
+									<>
+										{todo.compeleted ? (
+											<></>
+										) : (
+											<i
+												className="fal fa-check-circle"
+												onClick={() =>
+													compeletedTodo(todo.id)
+												}
+											></i>
+										)}
+										<i
+											className="pl fal fa-edit"
+											onClick={() => editTodo(todo.id)}
+										></i>
+										<i
+											className="pl fal fa-times-circle"
+											onClick={() => deletedTodo(todo.id)}
+										></i>
+									</>
+								)}
+							</li>
+						))}
 					</ul>
 				</div>
 			)}
+			{compeleted && <div>Your TODO is compeleted!!</div>}
 		</>
 	);
 }

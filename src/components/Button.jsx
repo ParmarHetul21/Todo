@@ -9,6 +9,7 @@ function Button({ ...props }) {
 
 	const AddTodo = () => {
 		dispatch(addTodoAction(uuid(), props.data));
+		props.setdata("");
 	};
 
 	useEffect(() => {

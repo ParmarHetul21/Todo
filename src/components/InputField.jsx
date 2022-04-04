@@ -2,11 +2,7 @@ import React from "react";
 
 function InputField({ ...props }) {
 	const InputChange = (e) => {
-		if (e.target.value === null) {
-			console.log("Empty");
-		} else {
-			props.data(e.target.value);
-		}
+		props.data(e.target.value);
 	};
 
 	return (
@@ -14,9 +10,10 @@ function InputField({ ...props }) {
 			<input
 				type={props.type}
 				className={props.className}
+				value={props.value}
 				name={props.name}
-				placeholder={props.placeholder}
 				onChange={(e) => InputChange(e)}
+				placeholder={props.placeholder}
 			/>
 		</>
 	);
