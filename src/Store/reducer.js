@@ -31,7 +31,15 @@ const todoReducer = (state = initalState, action) => {
 			};
 
 		case UPDATE_TODO:
-			return;
+			return {
+				...state,
+				todo: state.todo.map((todo) => {
+					if (todo.id === action.payload.id) {
+						return { ...todo, name: action.payload.updTodo };
+					}
+					return todo;
+				})
+			};
 
 		case DELETED_TODO:
 			return {

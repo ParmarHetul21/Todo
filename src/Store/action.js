@@ -21,11 +21,11 @@ export const compeletedTodoAction = (id) => ({
 	payload: id
 });
 
-export const updateTodoAction = (id, todo) => ({
+export const updateTodoAction = (id, updTodo) => ({
 	type: UPDATE_TODO,
 	payload: {
 		id: id,
-		todo: todo
+		todo: updTodo
 	}
 });
 

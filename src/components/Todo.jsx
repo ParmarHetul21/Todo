@@ -8,7 +8,8 @@ function Todo() {
 	const todos = useSelector((state) => state.todo);
 	const [filterType, setFilterType] = useState();
 	const [filteredTodo, setFilteredTodo] = useState();
-	const [todo, setTodo] = useState("");
+	const [todo, setTodo] = useState({});
+	const [update, setUpdate] = useState(false);
 
 	useEffect(() => {
 		if (filterType === "completed") {
@@ -20,38 +21,54 @@ function Todo() {
 		}
 	}, [filterType, todos]);
 
-	const btnCompeleted = () => {
-		setFilterType("completed");
-	};
-
-	const btnUncompeleted = () => {
-		setFilterType("uncompleted");
-	};
-
-	const allTodo = () => {
-		setFilterType("all");
-	};
+	const btnCompeleted = () => setFilterType("completed");
+	const btnUncompeleted = () => setFilterType("uncompleted");
+	const allTodo = () => setFilterType("all");
 
 	return (
 		<>
 			<div className="todo-boundary">
 				<div className="todo-title">Todo-Redux</div>
 
-				<InputField
-					type="text"
-					className="your-todo"
-					name="todo"
-					placeholder="enter your todo"
-					value={todo}
-					data={setTodo}
-				/>
-				<Button
-					type="submit"
-					className="lg-btn-submit"
-					name="Submit"
-					data={todo}
-					setdata={setTodo}
-				/>
+				{update ? (
+					<>
+						<InputField
+							type="text"
+							className="your-todo"
+							name="todo"
+							placeholder="enter your todo"
+							value={todo.name}
+							data={setTodo}
+						/>
+						<Button
+							type="submit"
+							className="lg-btn-submit"
+							name="Update"
+							update={update}
+							data={todo.name}
+							id={todo.id}
+							setdata={setTodo}
+						/>
+					</>
+				) : (
+					<>
+						<InputField
+							type="text"
+							className="your-todo"
+							name="todo"
+							placeholder="enter your todo"
+							value={todo}
+							data={setTodo}
+						/>
+						<Button
+							type="submit"
+							className="lg-btn-submit"
+							name="Submit"
+							data={todo}
+							setdata={setTodo}
+						/>
+					</>
+				)}
 
 				<div className="btn-filter">
 					<button
@@ -76,7 +93,11 @@ function Todo() {
 						All
 					</button>
 				</div>
-				<List todos={filteredTodo || todos} />
+				<List
+					todos={filteredTodo || todos}
+					editTodo={setTodo}
+					setUpdate={setUpdate}
+				/>
 			</div>
 		</>
 	);
