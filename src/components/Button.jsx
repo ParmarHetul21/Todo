@@ -14,8 +14,8 @@ function Button({ ...props }) {
 
 	const UpdateTodo = () => {
 		console.log("update caled");
-		console.log(props.id);
-		console.log(dispatch(updateTodoAction(props.id, props.data)));
+
+		console.log(dispatch(updateTodoAction(props.data.id, props.data.name)));
 	};
 
 	useEffect(() => {

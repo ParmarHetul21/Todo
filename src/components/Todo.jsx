@@ -9,6 +9,7 @@ function Todo() {
 	const [filterType, setFilterType] = useState();
 	const [filteredTodo, setFilteredTodo] = useState();
 	const [todo, setTodo] = useState({});
+	const [id, setId] = useState("");
 	const [update, setUpdate] = useState(false);
 
 	useEffect(() => {
@@ -19,7 +20,8 @@ function Todo() {
 		} else {
 			setFilteredTodo(todos);
 		}
-	}, [filterType, todos]);
+		setId(todo.id);
+	}, [filterType, todos, todo]);
 
 	const btnCompeleted = () => setFilterType("completed");
 	const btnUncompeleted = () => setFilterType("uncompleted");
@@ -29,28 +31,7 @@ function Todo() {
 		<>
 			<div className="todo-boundary">
 				<div className="todo-title">Todo-Redux</div>
-
 				{update ? (
-					<>
-						<InputField
-							type="text"
-							className="your-todo"
-							name="todo"
-							placeholder="enter your todo"
-							value={todo.name}
-							data={setTodo}
-						/>
-						<Button
-							type="submit"
-							className="lg-btn-submit"
-							name="Update"
-							update={update}
-							data={todo.name}
-							id={todo.id}
-							setdata={setTodo}
-						/>
-					</>
-				) : (
 					<>
 						<InputField
 							type="text"
@@ -63,13 +44,30 @@ function Todo() {
 						<Button
 							type="submit"
 							className="lg-btn-submit"
-							name="Submit"
+							name="Update"
+							update={update}
 							data={todo}
+						/>
+					</>
+				) : (
+					<>
+						<InputField
+							type="text"
+							className="your-todo"
+							name="todo"
+							placeholder="enter your todo"
+							value={todo.name}
+							data={setTodo}
+						/>
+						<Button
+							type="submit"
+							className="lg-btn-submit"
+							name="Submit"
+							data={todo.name}
 							setdata={setTodo}
 						/>
 					</>
 				)}
-
 				<div className="btn-filter">
 					<button
 						type="submit"

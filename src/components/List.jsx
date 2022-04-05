@@ -26,7 +26,8 @@ function List({ ...props }) {
 
 	const editTodo = (id) => {
 		var newElement = props.todos.find((elem) => elem.id === id);
-		props.editTodo(newElement.name);
+		console.log(newElement);
+		props.editTodo(newElement);
 		props.setUpdate(true);
 	};
 

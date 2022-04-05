@@ -35,7 +35,7 @@ const todoReducer = (state = initalState, action) => {
 				...state,
 				todo: state.todo.map((todo) => {
 					if (todo.id === action.payload.id) {
-						return { ...todo, name: action.payload.updTodo };
+						return { ...todo, name: action.payload.todo };
 					}
 					return todo;
 				})
